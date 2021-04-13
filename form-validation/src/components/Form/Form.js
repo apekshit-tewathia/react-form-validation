@@ -39,7 +39,7 @@ class Form extends React.Component {
       if(errors.filter(Boolean).length > 0) {
         isErrorPresent = true;
       }
-      updatedState = { ...updatedState, [key]: { ...updatedState[key], error: errors.filter(Boolean) } }
+      updatedState = { ...updatedState, [key]: { ...updatedState[key], error: errors.filter(Boolean) } };
     })
     this.setState(updatedState);
     return !isErrorPresent;
@@ -59,27 +59,19 @@ class Form extends React.Component {
 
   checkEmailFormat(field) {
     if (!EMAIL_REGEXP.test(this.state[field].value)) {
-      return 'Invalid format'
+      return 'Invalid Email format'
     }
   }
 
   checkUrlFormat (field) {
     if (!URL_REGEXP.test(this.state[field].value)) {
-      return 'Invalid format'
+      return 'Invalid URL format'
     }
   }
 
-  checkLength(field) {
-    if (this.state[field].value.trim().length < TEXTAREA_MIN_LENGTH) {
-      return `Must me greater than ${TEXTAREA_MIN_LENGTH} characters`
-    }
-  }
-
-  handleSubmit (event) {
-    event.preventDefault();
-    if (this.validateInput()) {
-      alert('Successfully submitted');
-      this.setState(this.defaultState);
+  checkLength(field, minLength=TEXTAREA_MIN_LENGTH) {
+    if (this.state[field].value.trim().length < minLength) {
+      return `Must me greater than ${minLength} characters`
     }
   }
 
@@ -90,14 +82,22 @@ class Form extends React.Component {
     })
   }
 
+  handleSubmit (event) {
+    event.preventDefault();
+    if (this.validateInput()) {
+      alert('Successfully submitted');
+      this.setState(this.defaultState);
+    }
+  }
+
   render() { 
     return (
       <div className = "container">
         <div className = 'center-text heading'>Registration Form </div>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          {Object.keys(this.state).map((key, index) => {
-            return <Input {...this.state[key]} onChange={(event) => { this.onChangeHandler(event) }}  key={index}/>
-          })}
+          { Object.keys(this.state).map((key, index) => {
+            return <Input {...this.state[key]} onChange={ (event) => { this.onChangeHandler(event) }}  key={index}/>
+          } ) }
           <h6>You will be sent an email when someone posts comments on your blog or album</h6>
           <h5 className = 'center-text'>Your password will be mailed to you</h5>
           <Input type='submit' value='Go' inputClass='heading' containerClass='center-text' />
@@ -107,4 +107,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form
+export default Form;
