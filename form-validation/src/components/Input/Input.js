@@ -5,7 +5,7 @@ const Input = (props) => {
       <div>
         <label htmlFor={ props.name } >{ props.label } </label>
         <input type={ props.type } name={ props.name } id={ props.name } value={props.value} onChange={props.onChange}/>
-        {props.error && <span className='error' > {props.error} </span> }
+        {props.error && <div className='error' > {props.error.join()} </div> }
       </div>
     )
   } else if (props.type === 'select') {
@@ -18,7 +18,7 @@ const Input = (props) => {
           })}
         </select>
         {props.error &&
-          <span className='error' > {props.error} </span>
+          <div className='error' > {props.error.join()} </div>
         }
         </div> 
     )   
@@ -27,7 +27,7 @@ const Input = (props) => {
       <div>
         <input type={props.type} id={props.name} name={props.name} value={props.value} onChange={props.onChange}/>
         <label htmlFor={props.name}><h5>{props.label}</h5></label>
-        {props.error && <span className='error' > {props.error} </span> }
+        {props.error && <span className='error' > {props.error.join()} </span> }
       </div>
     )
   } else if (props.type === 'textarea') {
@@ -35,14 +35,13 @@ const Input = (props) => {
       <div>
         <label htmlFor={ props.name } >{ props.label } </label> <br />
         <textarea rows = { props.rows } cols={ props.cols } name={ props.name } id={ props.name } value={props.value} onChange={props.onChange}/>
-        {props.error && <span className='error' > {props.error} </span> }
+        {props.error && <span className='error' > {props.error.join()} </span> }
       </div>
     )
   } else if (props.type==='submit') {
     inputElement = (
       <div className={props.containerClass}>
         <input type={props.type} value={props.value} className={props.inputClass} />
-        <span className='error' > {props.error} </span>
       </div>
     )
   }
