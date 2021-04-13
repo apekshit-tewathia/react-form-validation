@@ -1,0 +1,28 @@
+.container{
+  margin:auto;
+  width: 25%;
+  background-color: #CFED90;
+  padding-bottom: 5px;
+  
+  .center-text{
+    text-align: center;
+  }
+  label {
+    display: inline-block;
+    min-width: 100px;
+  }
+  .heading{
+    background-color: #6B8E23;
+  }
+  textarea{
+    width: 95%;
+  }
+  form{
+    padding-left: 5px;
+    margin-top: 10px;
+  }
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+}
